@@ -18,9 +18,8 @@ I am **not** an android guy. Before this I knew nothing about rooting android ph
 * To turn on dev mode type the following into the popup and press ok: `###3383567376633###`
 * Reopen secret code menu by dialing `###2633###`
 * To turn on adb type the following into the popup and press ok: `###864453232463###`
-* Reboot the phone
-* Open Home page and plug into usb
-* Run `adb devices` and accept the popup on screen
+* Plug in usb
+* Be sure to click accept on the adb system popup
 * Run `adb shell` to get an adb shell on the phone
 
 ### Finishing up
