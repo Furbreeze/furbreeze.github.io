@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    
+  </head>
+  <body>
+    <div>
+      <header class="container">
+        <hgroup>
+          <h1>{{ site.name }}</h1>
+          <p>{{ site.description }}</p>
+        </hgroup>
+        <nav>
+          <ul>
+            <li><a href="{{ site.baseurl }}/">Blog</a></li>
+            <li><a href="{{ site.baseurl }}/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <main class="container">
+      {{ content }}
+    </main>
+
+    <footer class="container">
+      <small>Made with love</small>
+    </footer>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6S938GBNS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Q6S938GBNS');
+    </script>
+
+  </body>
+</html>

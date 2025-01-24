@@ -1,1 +1,13 @@
-Hello World
+---
+layout: default
+---
+
+<div class="posts">
+  {% for post in site.posts %}
+    <article>
+      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+      <div>{{ post.excerpt }}</div>
+      <a href="{{ site.baseurl }}{{ post.url }}">Read More</a>
+    </article>
+  {% endfor %}
+</div>
