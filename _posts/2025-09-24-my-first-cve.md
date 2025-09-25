@@ -3,8 +3,6 @@ layout: post
 title:  "How I found my first CVE (CVE-2025-8447)"
 ---
 
-## Preamble
-
 I'd always been interested in bug bounty and I REALLY wanted a CVE for nerd cred. However, I always struggled with confidence and sticking with it despite loads of impostor syndrome.
 
 Earlier in the year I found a bug in Windmill that [ended up flying under the radar](https://github.com/windmill-labs/windmill/commit/3c6d1029d19fc822c955681594e500ff0613fd89) and not getting a CVE. The excitement of finding that bug and not getting a CVE drove me to really try and find one. 
@@ -15,7 +13,7 @@ So I discussed with some of my colleagues and they pointed out that GitHub was a
 
 The bug was assigned [CVE-2025-8447](https://www.cve.org/cverecord?id=CVE-2025-8447). 
 
-An improper access control vulnerability was identified in GitHub Enterprise Server that allowed users with access to any repository to retrieve limited code content from another repository by creating a diff between the repositories. This vulnerability affected all versions of GitHub Enterprise Server prior to 3.18, and was fixed in versions 3.14.17, 3.15.12, 3.16.8 and 3.17.5.
+>An improper access control vulnerability was identified in GitHub Enterprise Server that allowed users with access to any repository to retrieve limited code content from another repository by creating a diff between the repositories. This vulnerability affected all versions of GitHub Enterprise Server prior to 3.18, and was fixed in versions 3.14.17, 3.15.12, 3.16.8 and 3.17.5.
 
 ## The Journey
 
