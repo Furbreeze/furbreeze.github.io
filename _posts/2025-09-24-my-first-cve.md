@@ -3,7 +3,7 @@ layout: post
 title:  "How I found my first CVE (CVE-2025-8447)"
 ---
 
-I'd always been interested in bug bounty and I REALLY wanted a CVE for nerd cred. However, I always struggled with confidence and sticking with it despite loads of impostor syndrome.
+I'd always been interested in bug bounty and I REALLY wanted a CVE for nerd cred. However, I always struggled with confidence and sticking with it due to loads of impostor syndrome.
 
 Earlier in the year I found a bug in Windmill that [ended up flying under the radar](https://github.com/windmill-labs/windmill/commit/3c6d1029d19fc822c955681594e500ff0613fd89) and not getting a CVE. The excitement of finding that bug and not getting a CVE drove me to really try and find one. 
 
