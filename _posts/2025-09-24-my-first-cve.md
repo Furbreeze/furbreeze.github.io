@@ -17,30 +17,38 @@ The bug was assigned [CVE-2025-8447](https://www.cve.org/cverecord?id=CVE-2025-8
 
 ## The Journey
 
-So after some digging and discussing, it was brought to my attention that GitHub Enterprise Server is *sort of* open source. Apparently if you download the latest version and run a ruby script that you can find out there in the aether, run it against the obfuscated code in the server download, and bob's your uncle! Full source access to GitHub Enterprise Server.
+So after some digging and discussing, it was brought to my attention that GitHub Enterprise Server is *sort of* open source. A friend told me you can visit the enterprise server [downloads page](https://docs.github.com/en/enterprise-server@latest/admin/all-releases) and grab the latest copy. The code is present on the enterprise obviously, but what was surprising to me, was that it was all in ruby and readable thanks to some deobfuscation scripts. I'm an appsec guy, so I'll always take source whenever I can get it. Armed with full source access to GitHub Enterprise Server, I embarked on my first serious attempt at bug bounty.
 
-After getting that set up and running on my environment, I started poking at the server while having source code to back up my testing. I spent a few weeks on email verification and found an interesting issue I can't discuss further, but it was ultimately deemed not exploitable. Bummer. Luckily, this time wasn't wasted because I became very familiar with the codebase and the layout of functionality.
+After getting that set up and running on a spare laptop (this VM seriously takes 30gb of ram), I started poking at the server and reading, trying to get a feel for the code. Whenever I start diving into a codebase, I always invest a litle time into determining how to efficiently map the external inputs and endpoints I'm seeing while using the application, to the lines of code processing them.
 
-So I finally gave up on email verification and decided to just peek at whatever I could. While scrolling through functionality in the repositories, I noticed something odd: A `...` in the request to compare two commits. My brain immediately said "That's not a normal web convention, that's custom. I wonder what they're doing there?".
+Once comfortable, I spent a few weeks on the email verification flow. I found an interesting issue that was ultimately deemed not exploitable. Luckily, this time wasn't wasted because I further built up my knowledge and "feel" for the codebase I was interacting with.
 
-So after diving in the source and playing around a bit, I saw that I could hit a different code path by using `..` instead of `...`. What's more, I was able to determine the full format of the payload, listed below:
+After the email issue, I needed a fresh perspective so I just started using the application again. While browsing through functionality in the repositories, I noticed something odd: A `...` in the request to compare two commits. My brain immediately said "That's not a normal web convention, there's some custom parsing going on... I wonder what they're doing there?".
 
-`https://<enterprise_url>/<your_username>/<your_repo>/compare/file-list?range=main..<other_user>:<their_private_repo>:<four_characters_of_a_commit_hash>`
+Further investigation in the source revealed that they were taking a few different inputs and mapping them to various repositories, users, and commits.  What's more, I was able to determine the full format of the payload, listed below:
 
-It was interesting to see that I could control the source and destination repository, ie: I could compare a repository I owned to any other repository, even one I didn't own. Surely this couldn't be true, right? Well I fired up burp and it really was that easy :) Just a plain old IDOR sitting there looking right at me.
+`https://<enterprise_url>/<your_username>/<your_repo>/compare/file-list?range=main...<other_user>:<their_private_repo>:<four_characters_of_a_commit_hash>`
+
+Additionally, there was a different code path I could reach by using `..` instead of `...`. What was interesting about the `..` format, was that I could control the source and destination repository. Specifically, I could compare a repository *I* owned to any other repository, even one I *didn't* own. Surely this couldn't be true, right? 
+
+Well I fired up burp and it really was that easy :) Just a plain old IDOR sitting there looking right at me.
 
 ![GitHub IDOR vulnerability](/images/gh_idor.png)
 
 Well this is exciting, I have a bug! What did I need to exploit it?
 1. An account on a GHE server
-2. The repository name and owner of another repository
-3. A commit hash to diff to and leak from
+1. The repository name
+1. The username of the repository owner
+1. A branch name
+1. A commit hash to diff to and leak from
 
-Since #1 is a given, I'll go through the way to obtain #2 and #3. 
+Looking at the above list, quite a few of these are "given". This attack assumes you already have an account on the GHE instance. Additionally, you're usually safe to assume the branch name will be main, master, or production, for most usecases.
 
-To obtain a repository name and owner, there are few ways to leak this, but you can get orgs, usernames etc. just by browsing the app. In order to get the actual repository name, you can initiate a transfer request between two users. If the user you're transferring to has a repository of the same name, the system will throw an error indicating they already have repository of that name.
+One way to get a repository name is to initiate a transfer request between two users. If the user you're transferring to has a repository of the same name, the system will throw an error indicating they already have repository of that name. 
 
-Okay, now onto the more challenging part, how do you leak a commit hash? This is a SHA-256 hash, so brute force guessing it is not going to work. Or is it...? 
+Finally, it is common for private repository names, usernames and organizations to be leaked in source code, commits, etc. which can be found through normal use of the application.
+
+With those out of the way, it's onto the more challenging part, how do you leak a commit hash? This is a SHA-256 hash, so brute force guessing it is not going to work. Or is it...? 
 
 After poking at the endpoint some more, I noticed that the endpoint only actually requires the first 4 characters of the commit hash. Armed with that knowledge, we've drastically reduced the brute force space to 65536 (16^4) guesses, and since there are no brute force protections in a standard deployment... EZ PZ. It should also be noted that this implies there's only ONE commit on the repo. The search space drastically reduces further the more commits that have been performed in the repo.
 
