@@ -81,6 +81,10 @@ Frankly, this is all still a work in progress and covering all of this could be 
 1. Wires and prayers to glue it all together
 1. This blog for storing and showing the data
 
+As an aside, this was my first time using Fusion 360, or really any 3d modeling software. A quick moment of silence for the fallen brethren that led to the current print.
+
+![Fallen](/images/fallen.jpg){: .center}
+
 All of this details for this can be found in my [Github Repo](https://github.com/Furbreeze/timescape). I will update the repo as well as this blog as any major updates are made.
 
 ## The Result
