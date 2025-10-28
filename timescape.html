@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<p>
+  What is this? Read more <a href="{% post_url 2025-10-27-timescape-v1 %}">here</a>
+</p>
+
+<h2>Tables</h2>
+<table class="striped">
+  <thead>
+    <tr>
+      <th>Skill Name</th>
+      <th>Level</th>
+      <th>Current XP</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for skill in site.data.db %}
+    <tr>
+        <td>{{ skill.skill_name }}</td>
+        <td>{{ skill.level }}</td>
+        <td>{{ skill.current_xp }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

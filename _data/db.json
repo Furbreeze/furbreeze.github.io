@@ -1,0 +1,32 @@
+[
+  {
+    "skill_name": "Strength",
+    "current_xp": 174,
+    "level": 3
+  },
+  {
+    "skill_name": "Cardio",
+    "current_xp": 174,
+    "level": 3
+  },
+  {
+    "skill_name": "Bug Bounty",
+    "current_xp": 174,
+    "level": 3
+  },
+  {
+    "skill_name": "Blog Writing",
+    "current_xp": 174,
+    "level": 3
+  },
+  {
+    "skill_name": "F-end Sec",
+    "current_xp": 174,
+    "level": 3
+  },
+  {
+    "skill_name": "B-end Sec",
+    "current_xp": 174,
+    "level": 3
+  }
+]
