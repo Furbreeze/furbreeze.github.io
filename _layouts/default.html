@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
-  </head>
-  <body>
-    <div>
-      <header class="container">
-        <hgroup>
-          <h1>{{ site.name }}</h1>
-          <p>{{ site.description }}</p>
-        </hgroup>
-        <nav>
-          <ul>
-            <li><a href="{{ site.baseurl }}/">Blog</a></li>
-            <li><a href="{{ site.baseurl }}/about">About</a></li>
-            <li><a href="{{ site.baseurl }}/timescape">XP Tracker</a></li>
-          </ul>
-        </nav>
-      </header>
+<head>
+  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}"
+    href="{{ site.baseurl }}/feed.xml" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+
+<body>
+  <div>
+    <header class="container">
+      <hgroup>
+        <h1>{{ site.name }}</h1>
+        <p>{{ site.description }}</p>
+      </hgroup>
+      <nav>
+        <ul>
+          <li><a href="{{ site.baseurl }}/">Blog</a></li>
+          <li><a href="{{ site.baseurl }}/about">About</a></li>
+          <li><a href="{{ site.baseurl }}/timescape">XP Tracker</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer class="container">
+    <div class="share-buttons">
+      <h6>Share on: </h6>
+      <ul>
+        <li>
+          <a href="https://twitter.com/intent/tweet?text={{ page.url | absolute_url }}"
+            class="twitter btn" title="Share on Twitter"><span>X</span></a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}"
+            class="facebook btn" title="Share on Facebook"><span>Facebook</span></a>
+        </li>
+        <li>
+          <a href="https://news.ycombinator.com/submitlink?u={{ page.url | absolute_url }}"
+            class="hacker-news btn" title="Share on Hacker News"><span> Hacker
+              News</span></a>
+        </li>
+        <li>
+          <a href="https://www.reddit.com/submit?url={{ page.url | absolute_url }}"
+            class="reddit btn" title="Share on Reddit"><span> Reddit</span></a>
+        </li>
+      </ul>
     </div>
+  </footer>
 
-    <main class="container">
-      {{ content }}
-    </main>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6S938GBNS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <footer class="container">
-      <small>Made with love</small>
-    </footer>
+    gtag('config', 'G-Q6S938GBNS');
+  </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6S938GBNS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+</body>
 
-      gtag('config', 'G-Q6S938GBNS');
-    </script>
-
-  </body>
 </html>
