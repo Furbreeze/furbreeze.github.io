@@ -126,7 +126,7 @@ I want to remain professional about how this went and only state the facts to st
 1. They parked many more packages on rubygems than I had found.
 1. They would not disclose this issue on Hackerone, but I'm allowed to blog about it.
 1. When asked to explain the bounty and impact, I did not receive a response.
-1. Their bounty page states they pay [$30k for criticals](https://bounty.github.com/#:~:text=Critical%20severity%20issues%20present%20a%20direct), despite what is says on hackerone.
+1. Their bounty page states they pay [$30k for criticals](https://bounty.github.com/#:~:text=Our%20bounty%20program%20gives%20a%20tip%20of%20the%20hat%20to%20these%20researchers%20and%20provides%20rewards%20of%20%2430%2C000%20or%20more%20for%20critical%20vulnerabilities), despite what is says on hackerone.
 1. They awarded me 200 swag points.
 
 ### My opinions
