@@ -1,5 +1,6 @@
 name: Furbreeze
 description: Dev Blog
+highlighter: none
 
 gems:
   - jekyll-sitemap
