@@ -109,7 +109,8 @@ The execution was coming from one specific package, but I had 125 more I was ask
 1. Sept 1st 2PM: Got callbacks, submitted bug.
 1. Sept 2nd 2PM: Asked to take down malicious gems.
 1. Sept 3rd 11AM: Callbacks stopped.
-1. Oct 28th 7PM: Issue closed, bounty of $20k rewarded.
+1. Oct 21st 7PM: Issue closed, bounty of $20k rewarded.
+1. **EDIT**: Nov 3rd: After a [tweet](https://x.com/seanmeals/status/1984790179953971611) that got some attention, I got feedback from github. Nothing changed with payout, but the communication was appreciated. This can now lay to rest. 
 
 ## My feelings about the bounty
 
